@@ -111,8 +111,16 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o nome da pessoa: ");
         String nome = scanner.nextLine();
+        if(!verificarExistenciaPessoa(nome)){
+            System.out.println("Pessoa nao cadastrada");
+            return;
+        }
         System.out.println("Digite a sala da chave: ");
         String sala = scanner.nextLine();
+        if(!verificarExistenciaChave(sala)){
+            System.out.println("Chave nao cadastrada");
+            return;
+        }
         Pessoa pessoa = new Pessoa();
         Chave chave = new Chave();
         for (Pessoa p : pessoas) {
@@ -197,4 +205,21 @@ public class App {
         System.out.flush();
     }
 
+    private static boolean verificarExistenciaPessoa(String nome) {
+        for (Pessoa pessoa : pessoas) {
+            if (pessoa.getNome().equals(nome)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean verificarExistenciaChave(String sala) {
+        for (Chave chave : chaves) {
+            if (chave.getSala().equals(sala)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
