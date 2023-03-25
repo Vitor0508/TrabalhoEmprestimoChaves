@@ -79,6 +79,10 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite a sala da chave: ");
         String nome = scanner.nextLine();
+        if(verificarExistenciaChave(nome)){
+            System.out.println("Chave ja cadastrada");
+            return;
+        }
         Chave chave = new Chave(codigoChave++, nome);
         chaves.add(chave);
         clearScreen();
@@ -97,11 +101,18 @@ public class App {
             System.out.println("Digite o siape da pessoa: ");
             String siape = scanner.nextLine();
             Pessoa pessoa = new Servidor(codigoPessoa++, nome, siape);
-            pessoas.add(pessoa);
+            /*if(verificarIgualdadePessoa(pessoa)){
+                System.out.println("Pessoa ja cadastrada");
+                
+                return;}
+            pessoas.add(pessoa);*/
         }else if(i == 2){
             System.out.println("Digite o nome da empresa: ");
             String empresa = scanner.nextLine();
             Pessoa terceirizado = new Tercerizado(codigoPessoa++, nome, empresa);
+            /*if(verificarIgualdadePessoa(terceirizado)){
+                System.out.println("Pessoa ja cadastrada");
+                return;}*/
             pessoas.add(terceirizado);
         }
         clearScreen();
@@ -150,8 +161,16 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o nome da pessoa: ");
         String nome = scanner.nextLine();
+        if(!verificarExistenciaPessoa(nome)){
+            System.out.println("Pessoa nao cadastrada");
+            return;
+        }
         System.out.println("Digite a sala da chave: ");
         String sala = scanner.nextLine();
+        if(!verificarExistenciaChave(sala)){
+            System.out.println("Chave nao cadastrada");
+            return;
+        }
         Pessoa pessoa = new Pessoa();
         Chave chave = new Chave();
         for (Pessoa p : pessoas) {
@@ -217,6 +236,15 @@ public class App {
     private static boolean verificarExistenciaChave(String sala) {
         for (Chave chave : chaves) {
             if (chave.getSala().equals(sala)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean verificarIgualdadePessoa(Pessoa pessoa) {
+        for (Pessoa p : pessoas) {
+            if (pessoa.equals(p)) {
                 return true;
             }
         }
