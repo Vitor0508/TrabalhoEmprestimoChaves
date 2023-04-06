@@ -15,29 +15,13 @@ public class App {
     private static ArrayList<Pessoa> pessoas = new ArrayList<>();
     private static ArrayList<Emprestimo> emprestimos = new ArrayList<>();
     public static void main(String[] args) throws Exception {
-        
-        /* 
-        Pessoa pessoa1 = new Pessoa(codigoPessoa++, "João");
-        Chave chave = new Chave(codigoChave++, "Chave 1", true);
-        Emprestimo emprestimo;
-        pessoa1.addContato(new Contato(1, tipoContato.EMAIL, "fulano@gmail.com"));
-        pessoa1.addContato(new Contato(2, tipoContato.CELULAR, "999999999"));
-        emprestimo = new Emprestimo(codigoEmprestimo++, pessoa1, chave);
-        emprestimo.setRetirada(LocalDateTime.now());
-        Pessoa pessoa2 = new Pessoa(codigoPessoa++, "Maria");
-        pessoa2.addContato(new Contato(1, tipoContato.EMAIL, "maria@gmail.com"));
-        ----------------------------------------------
-        */
-
+       
         int i = 0;
         //Inicializando o banco de dados
         Scanner scanner = new Scanner(System.in);
-        try {
-            Class.forName("org.postgresql.Driver");
-        }
-        catch (java.lang.ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+        
+        Class.forName("org.postgresql.Driver");
+        
         String url = "jdbc:postgres://ybnlwgqg:ITAn0N_xfyedmS7ea4jtD6FkFACV-iOC@babar.db.elephantsql.com/ybnlwgqg";
         String username = "ybnlwgqg";
         String password = "ITAn0N_xfyedmS7ea4jtD6FkFACV-iOC";
