@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.sql.*;
+import java.sql.DriverManager;
+
 public class App {
 
     private static long codigoChave = 1;
@@ -27,7 +30,35 @@ public class App {
         */
 
         int i = 0;
+        //Inicializando o banco de dados
         Scanner scanner = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+        }
+        catch (java.lang.ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        String url = "jdbc:postgres://ybnlwgqg:ITAn0N_xfyedmS7ea4jtD6FkFACV-iOC@babar.db.elephantsql.com/ybnlwgqg";
+        String username = "ybnlwgqg";
+        String password = "ITAn0N_xfyedmS7ea4jtD6FkFACV-iOC";
+
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        // Cria uma declaração SQL
+        Statement statement = connection.createStatement();
+
+        // Executa a query
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM pessoa");
+
+        // Itera sobre os resultados
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString("nome"));
+        }
+
+        // Fecha a conexão
+        statement.close();
+        resultSet.close();
+        connection.close();
 
         while(i != 8){
             
